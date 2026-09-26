@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Feedback</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f4f6f8;
+        }
+
+        .header {
+            background: #1f4e78;
+            color: white;
+            padding: 20px 40px;
+        }
+
+        .header h1 {
+            margin: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .form-box {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .btn {
+            background: #1f4e78;
+            color: white;
+            border: none;
+            padding: 11px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background: #163a5c;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 15px;
+            color: #1f4e78;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            text-decoration: underline;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>Edit Feedback</h1>
+    </div>
+
+    <div class="container">
+
+        <div class="form-box">
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <div class="form-group">
+
+                    <label>Feedback Content:</label>
+
+                    <textarea
+                        name="content"
+                        required
+                    >{{ feedback.content }}</textarea>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Channel:</label>
+
+                    <select name="channel" required>
+
+                        <option value="Website"
+                            {% if feedback.channel == "Website" %}selected{% endif %}>
+                            Website
+                        </option>
+
+                        <option value="Email"
+                            {% if feedback.channel == "Email" %}selected{% endif %}>
+                            Email
+                        </option>
+
+                        <option value="Social Media"
+                            {% if feedback.channel == "Social Media" %}selected{% endif %}>
+                            Social Media
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Sentiment:</label>
+
+                    <select name="sentiment" required>
+
+                        <option value="POS"
+                            {% if feedback.sentiment == "POS" %}selected{% endif %}>
+                            Positive
+                        </option>
+
+                        <option value="NEU"
+                            {% if feedback.sentiment == "NEU" %}selected{% endif %}>
+                            Neutral
+                        </option>
+
+                        <option value="NEG"
+                            {% if feedback.sentiment == "NEG" %}selected{% endif %}>
+                            Negative
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Status:</label>
+
+                    <select name="status" required>
+
+                        <option value="NEW"
+                            {% if feedback.status == "NEW" %}selected{% endif %}>
+                            New
+                        </option>
+
+                        <option value="REVIEWED"
+                            {% if feedback.status == "REVIEWED" %}selected{% endif %}>
+                            Reviewed
+                        </option>
+
+                        <option value="ACTIONED"
+                            {% if feedback.status == "ACTIONED" %}selected{% endif %}>
+                            Actioned
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <button type="submit" class="btn">
+                    Update Feedback
+                </button>
+
+            </form>
+
+
+            <a href="/" class="back-btn">
+                ← Back to Dashboard
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
